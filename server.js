@@ -8,7 +8,7 @@ const rateLimit = require("express-rate-limit");
 const authenticateToken = require("./middleware/authMiddleware");
 
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 10000;
 
 app.use(helmet());
 
