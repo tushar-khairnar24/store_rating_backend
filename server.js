@@ -13,17 +13,37 @@ const PORT = process.env.PORT || 4000;
 app.use(helmet());
 
 // ✅ Fixed: Vite runs on 5173, not 3000
-const allowedOrigins = ["http://localhost:5173", "https://store-rating-app-beta.vercel.app",];
+// const allowedOrigins = ["http://localhost:5173", "https://store-rating-app-beta.vercel.app",];
 // const allowedOrigins = ["*"];
+// app.use(
+//   cors({
+//     origin: allowedOrigins,
+//     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+//     credentials: true,
+//   })
+// );
+
+
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: function (origin, callback) {
+      const allowedOrigins = [
+        "http://localhost:5173",
+        "https://store-rating-app-beta.vercel.app",
+      ];
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
 
-app.options("*", cors());
+
 
 app.use(express.json());
 
