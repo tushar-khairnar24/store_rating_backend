@@ -23,6 +23,9 @@ const Store = sequelize.define("Store", {
     type: DataTypes.FLOAT,
     defaultValue: 0,
   },
+},{
+  tableName: "stores",      
+  freezeTableName: true,
 });
 
 module.exports = Store;
