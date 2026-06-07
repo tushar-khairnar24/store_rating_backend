@@ -40,9 +40,6 @@ Rating.afterUpdate(async (rating) => {
 
 Rating.afterDestroy(async (rating) => {
   await recalcStoreAverage(rating.storeId);
-},{
-  tableName: "ratings",      
-  freezeTableName: true,
 });
 
 module.exports = Rating;
