@@ -13,15 +13,17 @@ const PORT = process.env.PORT || 4000;
 app.use(helmet());
 
 // ✅ Fixed: Vite runs on 5173, not 3000
-// const allowedOrigins = ["http://localhost:5173", "https://store-rating-app-beta.vercel.app",];
-const allowedOrigins = ["*"];
+const allowedOrigins = ["http://localhost:5173", "https://store-rating-app-beta.vercel.app",];
+// const allowedOrigins = ["*"];
 app.use(
   cors({
     origin: allowedOrigins,
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   })
 );
+
+app.options("*", cors());
 
 app.use(express.json());
 
