@@ -25,6 +25,9 @@ const User = sequelize.define("User", {
     type: DataTypes.ENUM("ADMIN", "USER", "STORE_OWNER"),
     defaultValue: "USER",
   },
+}, {
+  tableName: "users",      
+  freezeTableName: true,
 });
 
 module.exports = User;
